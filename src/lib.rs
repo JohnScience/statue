@@ -2,6 +2,7 @@ use proc_macro::TokenStream;
 
 pub(crate) mod selectors;
 pub(crate) mod args;
+pub(crate) mod elements;
 mod parse;
 
 use parse::Parse;

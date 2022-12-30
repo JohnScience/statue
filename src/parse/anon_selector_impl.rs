@@ -19,7 +19,14 @@ impl Parse for AnonSelector {
         if !(matches!(paren_group.delimiter(), Delimiter::Parenthesis)) {
             return Err(Error::ParenExpected);
         };
-        let Some(syn) = SelectorSyntax::new(paren_group.stream().to_string()) else {
+        let quoteless = paren_group.stream()
+            .to_string()
+            .strip_prefix("\"")
+            .unwrap()
+            .strip_suffix("\"")
+            .unwrap()
+            .to_owned();
+        let Some(syn) = SelectorSyntax::new(quoteless) else {
             return Err(Error::InvalidSelectorSyntax);
         };
 

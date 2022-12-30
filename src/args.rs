@@ -33,10 +33,7 @@ impl Args {
         let Self { path, selectors } = self;
         let html = path.read();
         let dom = tl::parse(html.as_str(), tl::ParserOptions::default()).unwrap();
-        let parser = dom.parser();
-        let save_files_handle = dom.query_selector("#save-files").unwrap().next().unwrap();
-        let save_files_node = save_files_handle.get(parser).unwrap();
-        let save_files_html = save_files_node.outer_html(parser);
-        panic!("{:#?}", save_files_html);
+        let elems = selectors.into_elements(&dom);
+        panic!("{:#?}", elems);
     }
 }
