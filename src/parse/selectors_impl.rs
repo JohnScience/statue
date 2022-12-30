@@ -1,8 +1,8 @@
-use proc_macro::{ token_stream::IntoIter as TokenTreeIter};
+use proc_macro::token_stream::IntoIter as TokenTreeIter;
 
 use crate::selectors::{ExplKindSelector, Selectors};
 
-use super::{Parse, error::selectors_impl::Error};
+use super::{error::selectors_impl::Error, Parse};
 
 impl Parse for Selectors {
     type Error = Error;
@@ -11,14 +11,10 @@ impl Parse for Selectors {
         let mut selectors = Self::new();
         loop {
             match ExplKindSelector::parse(iter) {
-                Ok(selector) => {
-                    selectors.push(selector)
-                },
-                Err(e) => {
-                    match e.try_into() {
+                Ok(selector) => selectors.push(selector),
+                Err(e) => match e.try_into() {
                     Err(_unrepr_err) => break,
                     Ok(err) => return Err(err),
-                }
                 },
             }
         }

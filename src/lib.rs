@@ -1,12 +1,12 @@
 use proc_macro::TokenStream;
 
-pub(crate) mod selectors;
 pub(crate) mod args;
 pub(crate) mod elements;
 mod parse;
+pub(crate) mod selectors;
 
-use parse::Parse;
 use args::Args;
+use parse::Parse;
 
 #[proc_macro]
 pub fn apply_selectors(ts: TokenStream) -> TokenStream {

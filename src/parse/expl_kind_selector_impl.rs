@@ -1,9 +1,9 @@
-use proc_macro::{TokenTree, token_stream::IntoIter as TokenTreeIter};
 use crate::selectors::AnonSelector;
+use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
 use crate::selectors::{ExplKindSelector, ImplKindSelector};
 
-use super::{Parse, error::expl_kind_selector_impl::Error};
+use super::{error::expl_kind_selector_impl::Error, Parse};
 
 impl Parse for ExplKindSelector {
     type Error = Error;
@@ -35,6 +35,9 @@ impl Parse for ExplKindSelector {
             return Err(Error::SemiExpected);
         };
 
-        Ok(Self { kind, rest: ImplKindSelector { name, syn } })
+        Ok(Self {
+            kind,
+            rest: ImplKindSelector { name, syn },
+        })
     }
 }

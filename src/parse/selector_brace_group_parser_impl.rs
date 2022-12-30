@@ -1,8 +1,8 @@
-use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree, Delimiter};
+use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
 
-use crate::selectors::{Selectors, SelectorBraceGroupParser};
+use crate::selectors::{SelectorBraceGroupParser, Selectors};
 
-use super::{Parse, error::selector_brace_group_parser_impl::Error};
+use super::{error::selector_brace_group_parser_impl::Error, Parse};
 
 impl Parse for SelectorBraceGroupParser {
     type Error = Error;

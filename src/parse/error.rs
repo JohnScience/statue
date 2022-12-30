@@ -15,7 +15,7 @@ pub(crate) mod anon_selector_impl {
 
 pub(crate) mod expl_kind_selector_impl {
     use super::anon_selector_impl::Error as Suberror;
-    
+
     #[repr(u8)]
     #[derive(Debug)]
     pub(crate) enum Error {

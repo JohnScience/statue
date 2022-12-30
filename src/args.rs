@@ -25,7 +25,7 @@ impl HtmlPath {
 
 pub(crate) struct Args {
     pub(crate) path: HtmlPath,
-    pub(crate) selectors: Selectors
+    pub(crate) selectors: Selectors,
 }
 
 impl Args {

@@ -1,6 +1,6 @@
-use proc_macro::{TokenTree, token_stream::IntoIter as TokenTreeIter, Delimiter};
-use crate::selectors::{SelectorKind, SelectorSyntax, AnonSelector};
-use super::{Parse, error::anon_selector_impl::Error};
+use super::{error::anon_selector_impl::Error, Parse};
+use crate::selectors::{AnonSelector, SelectorKind, SelectorSyntax};
+use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
 
 impl Parse for AnonSelector {
     type Error = Error;
@@ -19,7 +19,8 @@ impl Parse for AnonSelector {
         if !(matches!(paren_group.delimiter(), Delimiter::Parenthesis)) {
             return Err(Error::ParenExpected);
         };
-        let quoteless = paren_group.stream()
+        let quoteless = paren_group
+            .stream()
             .to_string()
             .strip_prefix("\"")
             .unwrap()
@@ -30,6 +31,6 @@ impl Parse for AnonSelector {
             return Err(Error::InvalidSelectorSyntax);
         };
 
-        Ok(Self { kind, syn})
+        Ok(Self { kind, syn })
     }
 }
