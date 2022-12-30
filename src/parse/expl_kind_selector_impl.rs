@@ -1,7 +1,7 @@
 use proc_macro::{TokenTree, token_stream::IntoIter as TokenTreeIter};
-use crate::selector::AnonSelector;
+use crate::selectors::AnonSelector;
 
-use crate::selector::{ExplKindSelector, ImplKindSelector};
+use crate::selectors::{ExplKindSelector, ImplKindSelector};
 
 use super::{Parse, error::expl_kind_selector_impl::Error};
 

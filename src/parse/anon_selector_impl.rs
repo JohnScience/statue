@@ -1,5 +1,5 @@
 use proc_macro::{TokenTree, token_stream::IntoIter as TokenTreeIter, Delimiter};
-use crate::selector::{SelectorKind, SelectorSyntax, AnonSelector};
+use crate::selectors::{SelectorKind, SelectorSyntax, AnonSelector};
 use super::{Parse, error::anon_selector_impl::Error};
 
 impl Parse for AnonSelector {
