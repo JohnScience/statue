@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 
-use crate::selectors::Selectors;
+use crate::{selectors::Selectors, extend_token_stream::ExtendTokenStream};
 use std::path::{Path, PathBuf};
 use tl;
 
@@ -34,6 +34,8 @@ impl Args {
         let html = path.read();
         let dom = tl::parse(html.as_str(), tl::ParserOptions::default()).unwrap();
         let elems = selectors.into_elements(&dom);
-        panic!("{:#?}", elems);
+        let mut ts = TokenStream::new();
+        elems.extend_token_stream(&mut ts);
+        ts
     }
 }

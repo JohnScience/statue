@@ -10,7 +10,7 @@ pub(crate) enum SelectorKind {
 }
 
 #[derive(Debug)]
-pub(crate) struct SelectorSyntax(String);
+pub(crate) struct SelectorSyntax(pub(crate) String);
 
 #[derive(Debug)]
 pub(crate) struct ImplKindSelector {
@@ -63,6 +63,7 @@ impl SingleSelectors {
                 SingleElement {
                     name: selector.name,
                     kind: elem_kind,
+                    syn: selector.syn,
                     phantom: PhantomData,
                 }
             })
@@ -103,6 +104,7 @@ impl MultiSelectors {
                 MultipleElements {
                     count,
                     name: selector.name,
+                    syn: selector.syn,
                     common_kind,
                     phantom: PhantomData,
                 }

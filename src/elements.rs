@@ -2,9 +2,11 @@ use core::marker::PhantomData;
 
 use tl::Bytes;
 
+use crate::selectors::SelectorSyntax;
+
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) enum ElementKind {
-    GenericHTMLElement,
+    GenericHtmlElement,
     Div,
     Img,
 }
@@ -13,12 +15,14 @@ pub(crate) enum ElementKind {
 pub(crate) struct SingleElement<'a> {
     pub(crate) name: String,
     pub(crate) kind: ElementKind,
+    pub(crate) syn: SelectorSyntax,
     pub(crate) phantom: PhantomData<&'a ()>,
 }
 
 #[derive(Debug)]
 pub(crate) struct MultipleElements<'a> {
     pub(crate) name: String,
+    pub(crate) syn: SelectorSyntax,
     pub(crate) count: usize,
     pub(crate) common_kind: ElementKind,
     pub(crate) phantom: PhantomData<&'a ()>,
@@ -37,7 +41,7 @@ impl ElementKind {
         } else if name == "img" {
             Self::Img
         } else {
-            Self::GenericHTMLElement
+            Self::GenericHtmlElement
         }
     }
 
@@ -45,7 +49,15 @@ impl ElementKind {
         if first == second {
             first.clone()
         } else {
-            Self::GenericHTMLElement
+            Self::GenericHtmlElement
+        }
+    }
+
+    pub(crate) fn to_web_sys_name(self) -> &'static str {
+        match self {
+            Self::GenericHtmlElement => "HtmlElement",
+            Self::Div => "HtmlDivElement",
+            Self::Img => "HtmlImageElement",
         }
     }
 }
