@@ -53,7 +53,9 @@ the elements chosen by selectors. However, this is not implemented yet.
 ## Note on (in-)completeness of implementation
 
 The implementation is **incomplete**. For example, many elements of [`web_sys`]
-are not yet supported.
+are not yet supported. One easy way to add support for more elements is to edit
+`src/elements.rs` and add the element to the `ElementKind` enum. Then, edit `new`
+method of `ElementKind` to return the element kind you added. Finally, edit `to_web_sys_name`.
 
 ## File structure
 

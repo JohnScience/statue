@@ -6,9 +6,10 @@ use crate::selectors::SelectorSyntax;
 
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) enum ElementKind {
-    GenericHtmlElement,
-    Div,
-    Img,
+    HtmlElement,
+    HtmlDivElement,
+    HtmlImageElement,
+    HtmlButtonElement,
 }
 
 #[derive(Debug)]
@@ -37,11 +38,13 @@ pub(crate) struct Elements<'a> {
 impl ElementKind {
     pub(crate) fn new(name: &Bytes) -> Self {
         if name == "div" {
-            Self::Div
+            Self::HtmlDivElement
         } else if name == "img" {
-            Self::Img
+            Self::HtmlImageElement
+        } else if name == "button" {
+            Self::HtmlButtonElement
         } else {
-            Self::GenericHtmlElement
+            Self::HtmlElement
         }
     }
 
@@ -49,15 +52,16 @@ impl ElementKind {
         if first == second {
             first.clone()
         } else {
-            Self::GenericHtmlElement
+            Self::HtmlElement
         }
     }
 
     pub(crate) fn to_web_sys_name(self) -> &'static str {
         match self {
-            Self::GenericHtmlElement => "HtmlElement",
-            Self::Div => "HtmlDivElement",
-            Self::Img => "HtmlImageElement",
+            Self::HtmlElement => "HtmlElement",
+            Self::HtmlDivElement => "HtmlDivElement",
+            Self::HtmlImageElement => "HtmlImageElement",
+            Self::HtmlButtonElement => "HtmlButtonElement",
         }
     }
 }
