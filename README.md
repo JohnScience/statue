@@ -47,7 +47,7 @@ instead.
 
 ## Note on optimization
 
-Eventually, this can be possible to just traverse the tree of HTML nodes to get
+Eventually, it can be possible to just traverse the tree of HTML nodes to get
 the elements chosen by selectors. However, this is not implemented yet.
 
 ## Note on (in-)completeness of implementation
