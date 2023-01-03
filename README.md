@@ -64,7 +64,8 @@ method of `ElementKind` to return the element kind you added. Finally, edit `to_
 - `.gitingore`: [Git ignore file].
 - `.markdownlint.json`: Configuration file for Markdown linting, used by
 [`DavidAnson.vscode-markdownlint`] Visual Studio Code extension.
-- `Cargo.lock` and `Cargo.toml`: Cargo configuration files.
+- `Cargo.toml` and `Cargo.lock` : Manifest and machine-generated list of
+dependencies. [Learn more](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html).
 - `LICENSE-APACHE`: Apache License, Version 2.0.
 - `LICENSE-MIT`: MIT License.
 - `README.md`: This file.
