@@ -1,5 +1,11 @@
 # Statue
 
+> Easier way to querry selectors for static HTML pages.
+
+[![Crates.io](https://img.shields.io/crates/v/statue)](https://crates.io/crates/statue)
+[![Docs.rs](https://docs.rs/statue/badge.svg)](https://docs.rs/statue)
+[![License](https://img.shields.io/crates/l/statue)](https://crates.io/crates/statue)
+
 Spare yourself from writing
 
 ```rust
@@ -38,3 +44,44 @@ initialize_elements!(
 ```
 
 instead.
+
+## Note on optimization
+
+Eventually, this can be possible to just traverse the tree of HTML nodes to get
+the elements chosen by selectors. However, this is not implemented yet.
+
+## Note on (in-)completeness of implementation
+
+The implementation is **incomplete**. For example, many elements of [`web_sys`]
+are not yet supported.
+
+## File structure
+
+- `src/`: Source code.
+- `target/`: Compiled code (generated).
+- `.gitingore`: [Git ignore file].
+- `.markdownlint.json`: Configuration file for Markdown linting, used by
+[`DavidAnson.vscode-markdownlint`] Visual Studio Code extension.
+- `Cargo.lock` and `Cargo.toml`: Cargo configuration files.
+- `LICENSE-APACHE`: Apache License, Version 2.0.
+- `LICENSE-MIT`: MIT License.
+- `README.md`: This file.
+
+## License
+
+<sup>
+Licensed under either of <a href="LICENSE-APACHE">Apache License, Version
+2.0</a> or <a href="LICENSE-MIT">MIT license</a> at your option.
+</sup>
+
+<br>
+
+<sub>
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this crate by you, as defined in the Apache-2.0 license, shall
+be dual licensed as above, without any additional terms or conditions.
+</sub>
+
+[`web_sys`]: https://docs.rs/web-sys/latest/web_sys/index.html
+[Git ignore file]: https://git-scm.com/docs/gitignore
+[`DavidAnson.vscode-markdownlint`]: https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint

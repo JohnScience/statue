@@ -1,4 +1,4 @@
-use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
+use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
 use crate::{
     args::{Args, HtmlPath},

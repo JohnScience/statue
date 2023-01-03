@@ -1,9 +1,31 @@
 [package]
 name = "statue"
 version = "0.1.0"
+authors = ["Dmitrii Demenev <demenev.dmitriy1@gmail.com>"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+rust-version = "1.65.0" # identified by https://github.com/foresterre/cargo-msrv
+description = "Easier way to querry selectors for static HTML pages."
+documentation = "https://docs.rs/statue"
+readme = "README.md"
+# homepage = ""
+repository = "https://github.com/JohnScience/statue"
+license = "MIT or Apache-2.0"
+# license-file = ""
+keywords = ["html", "selector", "query", "css"]
+categories = ["wasm", "web-programming"] # https://crates.io/category_slugs
+# workspace = ""
+# build = ""
+# links = ""
+# exclude = []
+# include = []
+# publish = []
+# metadata = {}
+# default-run = ""
+# autobins = false
+# autoexamples = false
+# autotests = false
+# autobenches = false
+# resolver = ""
 
 [dependencies]
 tl = "0.7.7"

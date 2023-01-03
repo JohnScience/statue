@@ -107,6 +107,7 @@ pub(crate) mod args_impl {
 
     #[repr(u8)]
     #[derive(Debug)]
+    #[allow(dead_code)]
     pub(crate) enum Error {
         UnknownSelectorKind = Suberror::UnknownSelectorKind as _,
         ParenExpected = Suberror::ParenExpected as _,
