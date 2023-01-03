@@ -1,6 +1,6 @@
-use proc_macro::{TokenStream, TokenTree, Ident, Span, Punct, Spacing, Delimiter, Group, Literal};
+use proc_macro::{Delimiter, Group, Ident, Literal, Punct, Spacing, Span, TokenStream, TokenTree};
 
-use crate::elements::{SingleElement, MultipleElements, Elements};
+use crate::elements::{Elements, MultipleElements, SingleElement};
 
 pub(crate) trait ExtendTokenStream {
     fn extend_token_stream(self, ts: &mut TokenStream);
@@ -8,7 +8,12 @@ pub(crate) trait ExtendTokenStream {
 
 impl<'a> ExtendTokenStream for SingleElement<'a> {
     fn extend_token_stream(self, ts: &mut TokenStream) {
-        let Self { name, kind, syn, phantom: _phantom } = self;
+        let Self {
+            name,
+            kind,
+            syn,
+            phantom: _phantom,
+        } = self;
         ts.extend([
             TokenTree::Ident(Ident::new("let", Span::call_site())),
             TokenTree::Ident(Ident::new(name.as_str(), Span::call_site())),
@@ -16,28 +21,17 @@ impl<'a> ExtendTokenStream for SingleElement<'a> {
             TokenTree::Ident(Ident::new("document", Span::call_site())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("query_selector", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                {
-                    let mut ts = TokenStream::new();
-                    ts.extend([
-                        TokenTree::Literal(Literal::string(&syn.0)),
-                    ]);
-                    ts
-                }
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, {
+                let mut ts = TokenStream::new();
+                ts.extend([TokenTree::Literal(Literal::string(&syn.0))]);
+                ts
+            })),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("dyn_into", Span::call_site())),
             TokenTree::Punct(Punct::new(':', Spacing::Joint)),
@@ -50,16 +44,10 @@ impl<'a> ExtendTokenStream for SingleElement<'a> {
             TokenTree::Punct(Punct::new(':', Spacing::Joint)),
             TokenTree::Ident(Ident::new(kind.to_web_sys_name(), Span::call_site())),
             TokenTree::Punct(Punct::new('>', Spacing::Alone)),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new(';', Spacing::Alone)),
         ]);
     }
@@ -67,7 +55,13 @@ impl<'a> ExtendTokenStream for SingleElement<'a> {
 
 impl<'a> ExtendTokenStream for MultipleElements<'a> {
     fn extend_token_stream(self, ts: &mut TokenStream) {
-        let Self { name, count: _count, common_kind: _coommon_kind, syn, phantom: _phantom } = self;
+        let Self {
+            name,
+            count: _count,
+            common_kind: _coommon_kind,
+            syn,
+            phantom: _phantom,
+        } = self;
         ts.extend([
             TokenTree::Ident(Ident::new("let", Span::call_site())),
             TokenTree::Ident(Ident::new(name.as_str(), Span::call_site())),
@@ -75,22 +69,14 @@ impl<'a> ExtendTokenStream for MultipleElements<'a> {
             TokenTree::Ident(Ident::new("document", Span::call_site())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("query_selector_all", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                {
-                    let mut ts = TokenStream::new();
-                    ts.extend([
-                        TokenTree::Literal(Literal::string(&syn.0)),
-                    ]);
-                    ts
-                }
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, {
+                let mut ts = TokenStream::new();
+                ts.extend([TokenTree::Literal(Literal::string(&syn.0))]);
+                ts
+            })),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new(';', Spacing::Alone)),
         ]);
     }
@@ -123,34 +109,21 @@ impl<'a> ExtendTokenStream for Elements<'a> {
             TokenTree::Punct(Punct::new(':', Spacing::Joint)),
             TokenTree::Punct(Punct::new(':', Spacing::Joint)),
             TokenTree::Ident(Ident::new("window", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new(';', Spacing::Alone)),
-            
             TokenTree::Ident(Ident::new("let", Span::call_site())),
             TokenTree::Ident(Ident::new("document", Span::call_site())),
             TokenTree::Punct(Punct::new('=', Spacing::Alone)),
             TokenTree::Ident(Ident::new("window", Span::call_site())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("document", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
-            TokenTree::Group(Group::new(
-                Delimiter::Parenthesis,
-                TokenStream::new()
-            )),
+            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
             TokenTree::Punct(Punct::new(';', Spacing::Alone)),
         ]);
         single.extend_token_stream(ts);

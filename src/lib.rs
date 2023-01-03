@@ -2,8 +2,8 @@ use proc_macro::TokenStream;
 
 pub(crate) mod args;
 pub(crate) mod elements;
-mod parse;
 pub(crate) mod extend_token_stream;
+mod parse;
 pub(crate) mod selectors;
 
 use args::Args;

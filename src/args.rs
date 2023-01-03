@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 
-use crate::{selectors::Selectors, extend_token_stream::ExtendTokenStream};
+use crate::{extend_token_stream::ExtendTokenStream, selectors::Selectors};
 use std::path::{Path, PathBuf};
 use tl;
 
