@@ -57,6 +57,12 @@ are not yet supported. One easy way to add support for more elements is to edit
 `src/elements.rs` and add the element to the `ElementKind` enum. Then, edit `new`
 method of `ElementKind` to return the element kind you added. Finally, edit `to_web_sys_name`.
 
+## Note on HTML spec compliance
+
+Internally, the crate uses [`tl`] to parse [`HTML`] and [`CSS`] selectors. This gives
+us extra speed and flexibility. However, the crate is not fully compliant with
+the HTML spec.
+
 ## File structure
 
 - `src/`: Source code.
@@ -88,3 +94,6 @@ be dual licensed as above, without any additional terms or conditions.
 [`web_sys`]: https://docs.rs/web-sys/latest/web_sys/index.html
 [Git ignore file]: https://git-scm.com/docs/gitignore
 [`DavidAnson.vscode-markdownlint`]: https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint
+[`HTML`]: https://html.spec.whatwg.org/multipage/
+[`CSS`]: https://www.w3.org/TR/css-syntax-3/
+[`tl`]: https://crates.io/crates/tl
