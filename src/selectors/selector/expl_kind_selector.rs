@@ -1,4 +1,4 @@
-use super::{SelectorKind, ImplKindSelector};
+use super::super::{SelectorKind, ImplKindSelector};
 
 pub(crate) struct ExplKindSelector {
     pub(crate) kind: SelectorKind,

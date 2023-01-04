@@ -4,17 +4,15 @@ use crate::elements::{Elements, SingleElement};
 
 mod selector_kind;
 mod selector_syntax;
-mod impl_kind_selector;
-mod anon_selector;
-mod expl_kind_selector;
+mod selector;
 mod single_selectors;
 mod multi_selectors;
 
 pub(crate) use selector_kind::SelectorKind;
 pub(crate) use selector_syntax::SelectorSyntax;
-pub(crate) use impl_kind_selector::ImplKindSelector;
-pub(crate) use anon_selector::AnonSelector;
-pub(crate) use expl_kind_selector::ExplKindSelector;
+pub(crate) use selector::ImplKindSelector;
+pub(crate) use selector::AnonSelector;
+pub(crate) use selector::ExplKindSelector;
 pub(crate) use single_selectors::SingleSelectors;
 pub(crate) use multi_selectors::MultiSelectors;
 

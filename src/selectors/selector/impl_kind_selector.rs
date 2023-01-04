@@ -1,4 +1,4 @@
-use super::SelectorSyntax;
+use super::super::SelectorSyntax;
 
 pub(crate) struct ImplKindSelector {
     pub(crate) name: String,
