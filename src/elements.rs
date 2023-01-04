@@ -2,7 +2,7 @@ use core::marker::PhantomData;
 
 use tl::Bytes;
 
-use crate::selectors::SelectorSyntax;
+use crate::selectors::SelSyntax;
 
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) enum ElementKind {
@@ -17,14 +17,14 @@ pub(crate) enum ElementKind {
 pub(crate) struct SingleElement<'a> {
     pub(crate) name: String,
     pub(crate) kind: ElementKind,
-    pub(crate) syn: SelectorSyntax,
+    pub(crate) syn: SelSyntax,
     pub(crate) phantom: PhantomData<&'a ()>,
 }
 
 #[derive(Debug)]
 pub(crate) struct MultipleElements<'a> {
     pub(crate) name: String,
-    pub(crate) syn: SelectorSyntax,
+    pub(crate) syn: SelSyntax,
     pub(crate) count: usize,
     pub(crate) common_kind: ElementKind,
     pub(crate) phantom: PhantomData<&'a ()>,

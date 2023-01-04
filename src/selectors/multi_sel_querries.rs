@@ -4,11 +4,11 @@ use tl::VDom;
 
 use crate::elements::{MultipleElements, ElementKind};
 
-use super::ImplKindSelector;
+use super::ImplKindSelQuerry;
 
-pub(crate) struct MultiSelectors(pub(super) Vec<ImplKindSelector>);
+pub(crate) struct MultiSelQuerries(pub(super) Vec<ImplKindSelQuerry>);
 
-impl MultiSelectors {
+impl MultiSelQuerries {
     pub(crate) fn into_elements<'a>(self, dom: &'a VDom) -> Vec<MultipleElements<'a>> {
         let parser = dom.parser();
         self.0

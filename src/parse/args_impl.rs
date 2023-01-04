@@ -2,7 +2,7 @@ use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
 use crate::{
     args::{Args, HtmlPath},
-    selectors::SelectorBraceGroupParser,
+    selectors::SelQuerryBraceGroupParser,
 };
 
 use super::{error::args_impl::Error, Parse};
@@ -61,10 +61,10 @@ impl Parse for Args {
             return Err(Error::ColonExpected);
         };
 
-        let selectors = SelectorBraceGroupParser::parse(iter).unwrap();
+        let selectors = SelQuerryBraceGroupParser::parse(iter).unwrap();
         Ok(Self {
             path: HtmlPath(html_path.to_owned()),
-            selectors,
+            sel_querries: selectors,
         })
     }
 }

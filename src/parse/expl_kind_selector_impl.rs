@@ -1,11 +1,11 @@
-use crate::selectors::AnonSelector;
+use crate::selectors::AnonSelQuerry;
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
-use crate::selectors::{ExplKindSelector, ImplKindSelector};
+use crate::selectors::{ExplKindSelQuerry, ImplKindSelQuerry};
 
 use super::{error::expl_kind_selector_impl::Error, Parse};
 
-impl Parse for ExplKindSelector {
+impl Parse for ExplKindSelQuerry {
     type Error = Error;
     type Output = Result<Self, Self::Error>;
     /// Each selector is expected to take the form
@@ -25,7 +25,7 @@ impl Parse for ExplKindSelector {
             return Err(Error::EqExpected);
         };
 
-        let AnonSelector { kind, syn } = match AnonSelector::parse(iter) {
+        let AnonSelQuerry { kind, syn } = match AnonSelQuerry::parse(iter) {
             Ok(selector) => selector,
             Err(e) => return Err(e.into()),
         };
@@ -37,7 +37,7 @@ impl Parse for ExplKindSelector {
 
         Ok(Self {
             kind,
-            rest: ImplKindSelector { name, syn },
+            rest: ImplKindSelQuerry { name, syn },
         })
     }
 }

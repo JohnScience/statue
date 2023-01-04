@@ -1,7 +1,7 @@
 #[derive(Debug)]
-pub(crate) struct SelectorSyntax(pub(crate) String);
+pub(crate) struct SelSyntax(pub(crate) String);
 
-impl SelectorSyntax {
+impl SelSyntax {
     pub(crate) fn new(cand: String) -> Option<Self> {
         Some(Self(cand))
     }

@@ -4,11 +4,11 @@ use tl::VDom;
 
 use crate::elements::ElementKind;
 
-use super::{ImplKindSelector, SingleElement};
+use super::{ImplKindSelQuerry, SingleElement};
 
-pub(crate) struct SingleSelectors(pub(super) Vec<ImplKindSelector>);
+pub(crate) struct SingleSelQuerries(pub(super) Vec<ImplKindSelQuerry>);
 
-impl SingleSelectors {
+impl SingleSelQuerries {
     pub(crate) fn into_elements<'a>(self, dom: &'a VDom) -> Vec<SingleElement<'a>> {
         let parser = dom.parser();
         self.0

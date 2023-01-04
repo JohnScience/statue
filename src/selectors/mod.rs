@@ -2,39 +2,39 @@ use tl::VDom;
 
 use crate::elements::{Elements, SingleElement};
 
-mod selector_kind;
+mod selector_querry_kind;
 mod selector_syntax;
-mod selector;
-mod single_selectors;
-mod multi_selectors;
+mod sel_querry;
+mod single_sel_querries;
+mod multi_sel_querries;
 
-pub(crate) use selector_kind::SelectorKind;
-pub(crate) use selector_syntax::SelectorSyntax;
-pub(crate) use selector::ImplKindSelector;
-pub(crate) use selector::AnonSelector;
-pub(crate) use selector::ExplKindSelector;
-pub(crate) use single_selectors::SingleSelectors;
-pub(crate) use multi_selectors::MultiSelectors;
+pub(crate) use selector_querry_kind::SelQuerryKind;
+pub(crate) use selector_syntax::SelSyntax;
+pub(crate) use sel_querry::ImplKindSelQuerry;
+pub(crate) use sel_querry::AnonSelQuerry;
+pub(crate) use sel_querry::ExplKindSelQuerry;
+pub(crate) use single_sel_querries::SingleSelQuerries;
+pub(crate) use multi_sel_querries::MultiSelQuerries;
 
-pub(crate) struct Selectors {
-    single: SingleSelectors,
-    multi: MultiSelectors,
+pub(crate) struct SelQuerries {
+    single: SingleSelQuerries,
+    multi: MultiSelQuerries,
 }
 
-pub(crate) struct SelectorBraceGroupParser;
+pub(crate) struct SelQuerryBraceGroupParser;
 
-impl Selectors {
+impl SelQuerries {
     pub(crate) fn new() -> Self {
         Self {
-            single: SingleSelectors(Vec::new()),
-            multi: MultiSelectors(Vec::new()),
+            single: SingleSelQuerries(Vec::new()),
+            multi: MultiSelQuerries(Vec::new()),
         }
     }
 
-    pub(crate) fn push(&mut self, selector: ExplKindSelector) {
-        let vec: &mut Vec<ImplKindSelector> = match selector.kind {
-            SelectorKind::Single => &mut self.single.0,
-            SelectorKind::Multi => &mut self.multi.0,
+    pub(crate) fn push(&mut self, selector: ExplKindSelQuerry) {
+        let vec: &mut Vec<ImplKindSelQuerry> = match selector.kind {
+            SelQuerryKind::Single => &mut self.single.0,
+            SelQuerryKind::Multi => &mut self.multi.0,
         };
         vec.push(selector.rest);
     }

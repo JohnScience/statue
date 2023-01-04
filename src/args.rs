@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 
-use crate::{extend_token_stream::ExtendTokenStream, selectors::Selectors};
+use crate::{extend_token_stream::ExtendTokenStream, selectors::SelQuerries};
 use std::path::{Path, PathBuf};
 use tl;
 
@@ -25,12 +25,12 @@ impl HtmlPath {
 
 pub(crate) struct Args {
     pub(crate) path: HtmlPath,
-    pub(crate) selectors: Selectors,
+    pub(crate) sel_querries: SelQuerries,
 }
 
 impl Args {
     pub(crate) fn handle(self) -> TokenStream {
-        let Self { path, selectors } = self;
+        let Self { path, sel_querries: selectors } = self;
         let html = path.read();
         let dom = tl::parse(html.as_str(), tl::ParserOptions::default()).unwrap();
         let elems = selectors.into_elements(&dom);

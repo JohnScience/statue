@@ -1,16 +1,16 @@
 use super::{error::anon_selector_impl::Error, Parse};
-use crate::selectors::{AnonSelector, SelectorKind, SelectorSyntax};
+use crate::selectors::{AnonSelQuerry, SelQuerryKind, SelSyntax};
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
 
-impl Parse for AnonSelector {
+impl Parse for AnonSelQuerry {
     type Error = Error;
     type Output = Result<Self, Self::Error>;
 
     fn parse(iter: &mut TokenTreeIter) -> Self::Output {
         let Some(ident) = iter.next() else { return Err(Error::Finished) };
         let kind = match ident.to_string().as_str() {
-            "Single" => SelectorKind::Single,
-            "Multi" => SelectorKind::Multi,
+            "Single" => SelQuerryKind::Single,
+            "Multi" => SelQuerryKind::Multi,
             _ => return Err(Error::UnknownSelectorKind),
         };
 
@@ -27,7 +27,7 @@ impl Parse for AnonSelector {
             .strip_suffix("\"")
             .unwrap()
             .to_owned();
-        let Some(syn) = SelectorSyntax::new(quoteless) else {
+        let Some(syn) = SelSyntax::new(quoteless) else {
             return Err(Error::InvalidSelectorSyntax);
         };
 
