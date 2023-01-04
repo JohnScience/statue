@@ -1,3 +1,8 @@
+pub(crate) mod ret_ty_kind_impl {
+    #[derive(Debug)]
+    pub(crate) struct RetTyKindExpected;
+}
+
 pub(crate) mod anon_selector_impl {
     #[repr(u8)]
     #[derive(Debug)]

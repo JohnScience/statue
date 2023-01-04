@@ -12,26 +12,26 @@ impl Parse for Args {
     type Output = Result<Self, Self::Error>;
     fn parse(iter: &mut TokenTreeIter) -> Self::Output {
         let Some(html) = iter.next() else {
-        return Err(Error::ArgsExpected);
-    };
+            return Err(Error::ArgsExpected);
+        };
         if !(matches!(html, TokenTree::Ident(html) if html.to_string() == "html")) {
             return Err(Error::HtmlArgExpected);
         };
 
         let Some(colon) = iter.next() else {
-        return Err(Error::ColonExpected);
-    };
+            return Err(Error::ColonExpected);
+        };
         if !(matches!(colon, TokenTree::Punct(colon) if colon.to_string() == ":")) {
             return Err(Error::ColonExpected);
         };
 
         let Some(html_path) = iter.next() else {
-        return Err(Error::StrLitHtmlPathExpected);
-    };
+            return Err(Error::StrLitHtmlPathExpected);
+        };
 
         let TokenTree::Literal(html_path) = html_path else {
-        return Err(Error::StrLitHtmlPathExpected);
-    };
+            return Err(Error::StrLitHtmlPathExpected);
+        };
 
         let path = html_path.to_string();
         let html_path = path.strip_prefix("\"").unwrap().strip_suffix("\"").unwrap();
@@ -61,7 +61,10 @@ impl Parse for Args {
             return Err(Error::ColonExpected);
         };
 
-        let selectors = SelQuerryBraceGroupParser::parse(iter).unwrap();
+        let selectors = match SelQuerryBraceGroupParser::parse(iter) {
+            Ok(selectors) => selectors,
+            Err(e) => return Err(e.into()),
+        };
         Ok(Self {
             path: HtmlPath(html_path.to_owned()),
             sel_querries: selectors,

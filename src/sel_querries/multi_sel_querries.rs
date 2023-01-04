@@ -2,7 +2,7 @@ use core::marker::PhantomData;
 
 use tl::VDom;
 
-use crate::elements::{MultipleElements, ElementKind};
+use crate::elements::{ElementKind, MultipleElements};
 
 use super::ImplKindSelQuerry;
 
@@ -13,11 +13,11 @@ impl MultiSelQuerries {
         let parser = dom.parser();
         self.0
             .into_iter()
-            .map(|selector| {
-                let mut query_res_iter = dom.query_selector(selector.syn.0.as_str()).expect(
+            .map(|ImplKindSelQuerry { name, ret_ty, syn }| {
+                let mut query_res_iter = dom.query_selector(syn.0.as_str()).expect(
                     format!(
                         "Failed to create an iterator over results of query for \"{:?}\" selector.",
-                        selector.syn.0.as_bytes()
+                        syn.0.as_bytes()
                     )
                     .as_str(),
                 );
@@ -40,8 +40,9 @@ impl MultiSelQuerries {
                 }
                 MultipleElements {
                     count,
-                    name: selector.name,
-                    syn: selector.syn,
+                    name,
+                    ret_ty,
+                    syn,
                     common_kind,
                     phantom: PhantomData,
                 }

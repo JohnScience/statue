@@ -13,18 +13,15 @@ impl SingleSelQuerries {
         let parser = dom.parser();
         self.0
             .into_iter()
-            .map(|selector| {
-                let handle = dom
-                    .query_selector(selector.syn.0.as_str())
-                    .unwrap()
-                    .next()
-                    .unwrap();
+            .map(|ImplKindSelQuerry { name, ret_ty, syn }| {
+                let handle = dom.query_selector(syn.0.as_str()).unwrap().next().unwrap();
                 let node = handle.get(parser).unwrap();
                 let elem_kind = ElementKind::new(node.as_tag().unwrap().name());
                 SingleElement {
-                    name: selector.name,
+                    name,
                     kind: elem_kind,
-                    syn: selector.syn,
+                    syn,
+                    ret_ty,
                     phantom: PhantomData,
                 }
             })

@@ -30,10 +30,10 @@ pub(crate) struct Args {
 
 impl Args {
     pub(crate) fn handle(self) -> TokenStream {
-        let Self { path, sel_querries: selectors } = self;
+        let Self { path, sel_querries } = self;
         let html = path.read();
         let dom = tl::parse(html.as_str(), tl::ParserOptions::default()).unwrap();
-        let elems = selectors.into_elements(&dom);
+        let elems = sel_querries.into_elements(&dom);
         let mut ts = TokenStream::new();
         elems.extend_token_stream(&mut ts);
         ts

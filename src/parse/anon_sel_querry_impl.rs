@@ -1,5 +1,5 @@
-use super::{error::anon_selector_impl::Error, Parse};
-use crate::sel_querries::{AnonSelQuerry, SelQuerryKind, SelSyntax};
+use super::{comma_seped_parser::CommaSepedParser, error::anon_selector_impl::Error, Parse};
+use crate::sel_querries::{AnonSelQuerry, RetTyKind, SelQuerryKind, SelSyntax};
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
 
 impl Parse for AnonSelQuerry {
@@ -19,18 +19,32 @@ impl Parse for AnonSelQuerry {
         if !(matches!(paren_group.delimiter(), Delimiter::Parenthesis)) {
             return Err(Error::ParenExpected);
         };
-        let quoteless = paren_group
-            .stream()
+        let mut paren_group_contents_iter = paren_group.stream().into_iter();
+        let Some(str_lit) = paren_group_contents_iter.next() else {
+            // TODO: replace with returning an error variant
+            panic!("Expected a string literal");
+        };
+        let TokenTree::Literal(str_lit) = str_lit else {
+            panic!("Expected a string literal");
+        };
+
+        let quoteless = str_lit
             .to_string()
             .strip_prefix("\"")
-            .unwrap()
+            .expect("Expected a string literal")
             .strip_suffix("\"")
-            .unwrap()
+            .expect("Expected a string literal")
             .to_owned();
+
         let Some(syn) = SelSyntax::new(quoteless) else {
             return Err(Error::InvalidSelectorSyntax);
         };
 
-        Ok(Self { kind, syn })
+        let ret_ty = CommaSepedParser::<RetTyKind>::parse(&mut paren_group_contents_iter)
+            .unwrap_or(Ok(RetTyKind::T))
+            // TODO: replace with returning an error variant
+            .expect("Unknown return type kind");
+
+        Ok(Self { kind, syn, ret_ty })
     }
 }

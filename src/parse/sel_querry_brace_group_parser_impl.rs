@@ -1,6 +1,6 @@
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
 
-use crate::sel_querries::{SelQuerryBraceGroupParser, SelQuerries};
+use crate::sel_querries::{SelQuerries, SelQuerryBraceGroupParser};
 
 use super::{error::selector_brace_group_parser_impl::Error, Parse};
 

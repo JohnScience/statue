@@ -1,4 +1,4 @@
-use super::super::{SelQuerryKind, ImplKindSelQuerry};
+use super::super::{ImplKindSelQuerry, SelQuerryKind};
 
 pub(crate) struct ExplKindSelQuerry {
     pub(crate) kind: SelQuerryKind,

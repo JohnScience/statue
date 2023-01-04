@@ -25,7 +25,7 @@ impl Parse for ExplKindSelQuerry {
             return Err(Error::EqExpected);
         };
 
-        let AnonSelQuerry { kind, syn } = match AnonSelQuerry::parse(iter) {
+        let AnonSelQuerry { kind, syn, ret_ty } = match AnonSelQuerry::parse(iter) {
             Ok(selector) => selector,
             Err(e) => return Err(e.into()),
         };
@@ -37,7 +37,7 @@ impl Parse for ExplKindSelQuerry {
 
         Ok(Self {
             kind,
-            rest: ImplKindSelQuerry { name, syn },
+            rest: ImplKindSelQuerry { name, syn, ret_ty },
         })
     }
 }

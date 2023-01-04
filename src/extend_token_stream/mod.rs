@@ -1,6 +1,9 @@
 use proc_macro::{Delimiter, Group, Ident, Literal, Punct, Spacing, Span, TokenStream, TokenTree};
 
-use crate::elements::{Elements, MultipleElements, SingleElement};
+use crate::{
+    elements::{Elements, MultipleElements, SingleElement},
+    sel_querries::RetTyKind,
+};
 
 pub(crate) trait ExtendTokenStream {
     fn extend_token_stream(self, ts: &mut TokenStream);
@@ -12,11 +15,16 @@ impl<'a> ExtendTokenStream for SingleElement<'a> {
             name,
             kind,
             syn,
+            ret_ty,
             phantom: _phantom,
         } = self;
         ts.extend([
             TokenTree::Ident(Ident::new("let", Span::call_site())),
             TokenTree::Ident(Ident::new(name.as_str(), Span::call_site())),
+            TokenTree::Punct(Punct::new(':', Spacing::Alone)),
+        ]);
+        RetTyKind::fmt_as_concrete_ty(ts, &ret_ty, &kind);
+        ts.extend([
             TokenTree::Punct(Punct::new('=', Spacing::Alone)),
             TokenTree::Ident(Ident::new("document", Span::call_site())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
@@ -48,8 +56,9 @@ impl<'a> ExtendTokenStream for SingleElement<'a> {
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
             TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
-            TokenTree::Punct(Punct::new(';', Spacing::Alone)),
         ]);
+        RetTyKind::extend_with_optional_into(ts, &ret_ty);
+        ts.extend([TokenTree::Punct(Punct::new(';', Spacing::Alone))]);
     }
 }
 
@@ -58,13 +67,18 @@ impl<'a> ExtendTokenStream for MultipleElements<'a> {
         let Self {
             name,
             count: _count,
-            common_kind: _coommon_kind,
+            ret_ty,
+            common_kind: _common_kind,
             syn,
             phantom: _phantom,
         } = self;
         ts.extend([
             TokenTree::Ident(Ident::new("let", Span::call_site())),
             TokenTree::Ident(Ident::new(name.as_str(), Span::call_site())),
+            TokenTree::Punct(Punct::new(':', Spacing::Alone)),
+        ]);
+        RetTyKind::fmt_as_inferred_ty(ts, &ret_ty);
+        ts.extend([
             TokenTree::Punct(Punct::new('=', Spacing::Alone)),
             TokenTree::Ident(Ident::new("document", Span::call_site())),
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
@@ -77,8 +91,9 @@ impl<'a> ExtendTokenStream for MultipleElements<'a> {
             TokenTree::Punct(Punct::new('.', Spacing::Alone)),
             TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
             TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
-            TokenTree::Punct(Punct::new(';', Spacing::Alone)),
         ]);
+        RetTyKind::extend_with_optional_into(ts, &ret_ty);
+        ts.extend([TokenTree::Punct(Punct::new(';', Spacing::Alone))]);
     }
 }
 
