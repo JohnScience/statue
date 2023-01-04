@@ -23,12 +23,13 @@ let layer_list_div = document
     .dyn_into::<HtmlDivElement>()
     .unwrap();
 
-let save_files_btn = document
+let save_files_btn: Rc<HtmlButtonElement> = document
     .query_selector("#save-files")
     .unwrap()
     .unwrap()
     .dyn_into::<HtmlButtonElement>()
-    .unwrap();
+    .unwrap()
+    .into();
 ```
 
 and write
@@ -38,7 +39,7 @@ initialize_elements!(
     html: "index.html", elements: {
         let work_area = Single("#work-area");
         let layer_list_div = Single("#layer-list");   
-        let save_files_btn = Single("#save-files");
+        let save_files_btn = Single("#save-files", RcT);
     }
 );
 ```
@@ -62,6 +63,16 @@ method to return the element kind you added. Finally, edit `ElementKind::to_web_
 Internally, the crate uses [`tl`] to parse [`HTML`] and [`CSS`] selectors. This gives
 us extra speed and flexibility. However, the crate is not fully compliant with
 the HTML spec.
+
+## Note on perceived performance
+
+On its own, `initialize_elements!` macro leads to a minor increase in initial
+load time because WASM script will first execute selector querries first and only
+after that all the truly useful code will execute.
+
+Eventually, it can be possible to befriend `initialize_elements!` with some
+attribute macro, that would rearrange the code so that selector querries would
+get executed exactly when they are needed.
 
 ## File structure
 
