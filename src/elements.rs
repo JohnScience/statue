@@ -10,6 +10,7 @@ pub(crate) enum ElementKind {
     HtmlDivElement,
     HtmlImageElement,
     HtmlButtonElement,
+    HtmlCanvaselement,
 }
 
 #[derive(Debug)]
@@ -43,6 +44,8 @@ impl ElementKind {
             Self::HtmlImageElement
         } else if name == "button" {
             Self::HtmlButtonElement
+        } else if name == "canvas" {
+            Self::HtmlCanvaselement
         } else {
             Self::HtmlElement
         }
@@ -62,6 +65,7 @@ impl ElementKind {
             Self::HtmlDivElement => "HtmlDivElement",
             Self::HtmlImageElement => "HtmlImageElement",
             Self::HtmlButtonElement => "HtmlButtonElement",
+            Self::HtmlCanvaselement => "HtmlCanvasElement",
         }
     }
 }
