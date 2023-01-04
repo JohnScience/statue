@@ -2,7 +2,7 @@ use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
 use crate::{
     args::{Args, HtmlPath},
-    selectors::SelQuerryBraceGroupParser,
+    sel_querries::SelQuerryBraceGroupParser,
 };
 
 use super::{error::args_impl::Error, Parse};

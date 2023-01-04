@@ -1,6 +1,6 @@
 use proc_macro::token_stream::IntoIter as TokenTreeIter;
 
-use crate::selectors::{ExplKindSelQuerry, SelQuerries};
+use crate::sel_querries::{ExplKindSelQuerry, SelQuerries};
 
 use super::{error::selectors_impl::Error, Parse};
 

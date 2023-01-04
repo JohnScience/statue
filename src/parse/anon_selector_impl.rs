@@ -1,5 +1,5 @@
 use super::{error::anon_selector_impl::Error, Parse};
-use crate::selectors::{AnonSelQuerry, SelQuerryKind, SelSyntax};
+use crate::sel_querries::{AnonSelQuerry, SelQuerryKind, SelSyntax};
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
 
 impl Parse for AnonSelQuerry {

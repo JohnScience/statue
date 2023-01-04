@@ -4,7 +4,7 @@ pub(crate) mod args;
 pub(crate) mod elements;
 pub(crate) mod extend_token_stream;
 mod parse;
-pub(crate) mod selectors;
+pub(crate) mod sel_querries;
 
 use args::Args;
 use parse::Parse;

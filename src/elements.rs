@@ -2,7 +2,7 @@ use core::marker::PhantomData;
 
 use tl::Bytes;
 
-use crate::selectors::SelSyntax;
+use crate::sel_querries::SelSyntax;
 
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) enum ElementKind {

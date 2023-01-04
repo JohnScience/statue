@@ -1,7 +1,7 @@
-use crate::selectors::AnonSelQuerry;
+use crate::sel_querries::AnonSelQuerry;
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
-use crate::selectors::{ExplKindSelQuerry, ImplKindSelQuerry};
+use crate::sel_querries::{ExplKindSelQuerry, ImplKindSelQuerry};
 
 use super::{error::expl_kind_selector_impl::Error, Parse};
 

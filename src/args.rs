@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 
-use crate::{extend_token_stream::ExtendTokenStream, selectors::SelQuerries};
+use crate::{extend_token_stream::ExtendTokenStream, sel_querries::SelQuerries};
 use std::path::{Path, PathBuf};
 use tl;
 
