@@ -6,7 +6,6 @@ use crate::elements::{MultipleElements, ElementKind};
 
 use super::ImplKindSelector;
 
-#[derive(Debug)]
 pub(crate) struct MultiSelectors(pub(super) Vec<ImplKindSelector>);
 
 impl MultiSelectors {

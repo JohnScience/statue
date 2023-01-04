@@ -18,7 +18,6 @@ pub(crate) use expl_kind_selector::ExplKindSelector;
 pub(crate) use single_selectors::SingleSelectors;
 pub(crate) use multi_selectors::MultiSelectors;
 
-#[derive(Debug)]
 pub(crate) struct Selectors {
     single: SingleSelectors,
     multi: MultiSelectors,

@@ -6,7 +6,6 @@ use crate::elements::ElementKind;
 
 use super::{ImplKindSelector, SingleElement};
 
-#[derive(Debug)]
 pub(crate) struct SingleSelectors(pub(super) Vec<ImplKindSelector>);
 
 impl SingleSelectors {
