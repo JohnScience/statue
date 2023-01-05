@@ -2,7 +2,7 @@ use proc_macro::{Delimiter, Group, Ident, Literal, Punct, Spacing, Span, TokenSt
 
 use crate::{
     elements::{Elements, MultipleElements, SingleElement},
-    sel_querries::RetTyKind,
+    sel_queries::RetTyKind,
 };
 
 pub(crate) trait ExtendTokenStream {

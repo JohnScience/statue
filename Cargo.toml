@@ -1,10 +1,10 @@
 [package]
 name = "statue"
-version = "0.1.6"
+version = "0.1.7"
 authors = ["Dmitrii Demenev <demenev.dmitriy1@gmail.com>"]
 edition = "2021"
 rust-version = "1.65.0" # identified by https://github.com/foresterre/cargo-msrv
-description = "Easier way to querry selectors for static HTML pages."
+description = "Easier way to query selectors for static HTML pages."
 documentation = "https://docs.rs/statue"
 readme = "README.md"
 # homepage = ""

@@ -1,4 +1,4 @@
-use crate::{args::Opts, sel_querries::RetTyKind};
+use crate::{args::Opts, sel_queries::RetTyKind};
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
 use super::{option_combinator::OptionCombinator, Parse};

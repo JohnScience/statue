@@ -1,6 +1,6 @@
 use proc_macro::TokenTree;
 
-use crate::sel_querries::RetTyKind;
+use crate::sel_queries::RetTyKind;
 
 use super::{error::ret_ty_kind_impl::RetTyKindExpected, Parse};
 

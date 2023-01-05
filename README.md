@@ -1,6 +1,6 @@
 # Statue
 
-> Easier way to querry selectors for static HTML pages.
+> Easier way to query selectors for static HTML pages.
 
 [![Crates.io](https://img.shields.io/crates/v/statue)](https://crates.io/crates/statue)
 [![Docs.rs](https://docs.rs/statue/badge.svg)](https://docs.rs/statue)
@@ -67,6 +67,9 @@ initialize_elements!(
 );
 ```
 
+If you want to invoke [`Document::query_selector_all`], you can use `Multi`
+selector query, though this functionality hasn't been tested thoroughly.
+
 ## Note on optimization
 
 Eventually, it can be possible to just traverse the tree of HTML nodes to get
@@ -88,11 +91,11 @@ the HTML spec.
 ## Note on perceived performance
 
 On its own, `initialize_elements!` macro leads to a minor increase in initial
-load time because WASM script will first execute selector querries first and only
+load time because WASM script will first execute selector queries first and only
 after that all the truly useful code will execute.
 
 Eventually, it can be possible to befriend `initialize_elements!` with some
-attribute macro, that would rearrange the code so that selector querries would
+attribute macro, that would rearrange the code so that selector queries would
 get executed exactly when they are needed.
 
 ## Note on quality of error messages
@@ -135,3 +138,4 @@ be dual licensed as above, without any additional terms or conditions.
 [`HTML`]: https://html.spec.whatwg.org/multipage/
 [`CSS`]: https://www.w3.org/TR/css-syntax-3/
 [`tl`]: https://crates.io/crates/tl
+[`Document::query_selector_all`]: https://rustwasm.github.io/wasm-bindgen/api/web_sys/struct.Document.html#method.query_selector_all

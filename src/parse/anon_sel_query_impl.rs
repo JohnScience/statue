@@ -1,8 +1,8 @@
 use super::{comma_seped_parser::CommaSepedParser, error::anon_selector_impl::Error, Parse};
-use crate::sel_querries::{AnonSelQuerry, RetTyKind, SelQuerryKind, SelSyntax};
+use crate::sel_queries::{AnonSelQuery, RetTyKind, SelQueryKind, SelSyntax};
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
 
-impl Parse for AnonSelQuerry {
+impl Parse for AnonSelQuery {
     type Error = Error;
     type OkTy = Self;
     type Wrapper<T, E> = Result<T, E>;
@@ -10,8 +10,8 @@ impl Parse for AnonSelQuerry {
     fn parse(iter: &mut TokenTreeIter) -> Self::Wrapper<Self::OkTy, Self::Error> {
         let Some(ident) = iter.next() else { return Err(Error::Finished) };
         let kind = match ident.to_string().as_str() {
-            "Single" => SelQuerryKind::Single,
-            "Multi" => SelQuerryKind::Multi,
+            "Single" => SelQueryKind::Single,
+            "Multi" => SelQueryKind::Multi,
             _ => return Err(Error::UnknownSelectorKind),
         };
 

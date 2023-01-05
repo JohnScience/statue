@@ -4,16 +4,16 @@ use tl::VDom;
 
 use crate::elements::{ElementKind, MultipleElements};
 
-use super::ImplKindSelQuerry;
+use super::ImplKindSelQuery;
 
-pub(crate) struct MultiSelQuerries(pub(super) Vec<ImplKindSelQuerry>);
+pub(crate) struct MultiSelQueries(pub(super) Vec<ImplKindSelQuery>);
 
-impl MultiSelQuerries {
+impl MultiSelQueries {
     pub(crate) fn into_elements<'a>(self, dom: &'a VDom) -> Vec<MultipleElements<'a>> {
         let parser = dom.parser();
         self.0
             .into_iter()
-            .map(|ImplKindSelQuerry { name, ret_ty, syn }| {
+            .map(|ImplKindSelQuery { name, ret_ty, syn }| {
                 let mut query_res_iter = dom.query_selector(syn.0.as_str()).expect(
                     format!(
                         "Failed to create an iterator over results of query for \"{:?}\" selector.",

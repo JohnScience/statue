@@ -2,7 +2,7 @@ use core::marker::PhantomData;
 
 use tl::Bytes;
 
-use crate::sel_querries::{RetTyKind, SelSyntax};
+use crate::sel_queries::{RetTyKind, SelSyntax};
 
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) enum ElementKind {

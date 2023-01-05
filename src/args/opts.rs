@@ -1,6 +1,6 @@
 use proc_macro::{Delimiter, Group, Ident, Punct, Spacing, Span, TokenStream, TokenTree};
 
-use crate::sel_querries::RetTyKind;
+use crate::sel_queries::RetTyKind;
 
 pub(crate) struct Opts {
     pub(crate) window_ret_ty: Option<RetTyKind>,

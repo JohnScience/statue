@@ -1,11 +1,11 @@
-use crate::sel_querries::AnonSelQuerry;
+use crate::sel_queries::AnonSelQuery;
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
-use crate::sel_querries::{ExplKindSelQuerry, ImplKindSelQuerry};
+use crate::sel_queries::{ExplKindSelQuery, ImplKindSelQuery};
 
 use super::{error::expl_kind_selector_impl::Error, Parse};
 
-impl Parse for ExplKindSelQuerry {
+impl Parse for ExplKindSelQuery {
     type Error = Error;
     type OkTy = Self;
     type Wrapper<O, E> = Result<O, E>;
@@ -27,7 +27,7 @@ impl Parse for ExplKindSelQuerry {
             return Err(Error::EqExpected);
         };
 
-        let AnonSelQuerry { kind, syn, ret_ty } = match AnonSelQuerry::parse(iter) {
+        let AnonSelQuery { kind, syn, ret_ty } = match AnonSelQuery::parse(iter) {
             Ok(selector) => selector,
             Err(e) => return Err(e.into()),
         };
@@ -39,7 +39,7 @@ impl Parse for ExplKindSelQuerry {
 
         Ok(Self {
             kind,
-            rest: ImplKindSelQuerry { name, syn, ret_ty },
+            rest: ImplKindSelQuery { name, syn, ret_ty },
         })
     }
 }
