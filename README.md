@@ -49,7 +49,7 @@ initialize_elements!(
 
 instead.
 
-If you want to have `Rc<Window>` or `Rc<Documet>`, or maybe hide them afterwards,
+If you want to have `Rc<Window>` or `Rc<Documemt>`, or maybe hide them afterwards,
 you can do so by supplying optional `opts` argument:
 
 ```rust
