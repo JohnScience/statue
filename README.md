@@ -9,6 +9,9 @@
 Spare yourself from writing
 
 ```rust
+let window = web_sys::window().unwrap();
+let document = window.document().unwrap();
+
 let work_area = document
     .query_selector("#work-area")
     .unwrap()
@@ -46,6 +49,24 @@ initialize_elements!(
 
 instead.
 
+If you want to have `Rc<Window>` or `Rc<Documet>`, or maybe hide them afterwards,
+you can do so by supplying optional `opts` argument:
+
+```rust
+initialize_elements!(
+    html: "index.html",
+    elements: {
+        let work_area = Single("#work-area");
+        let layer_list_div = Single("#layer-list");   
+        let save_files_btn = Single("#save-files", RcT);
+    },
+    opts: {
+        window_ret_ty: Some(RcT),
+        document_ret_ty: None
+    }
+);
+```
+
 ## Note on optimization
 
 Eventually, it can be possible to just traverse the tree of HTML nodes to get
@@ -73,6 +94,12 @@ after that all the truly useful code will execute.
 Eventually, it can be possible to befriend `initialize_elements!` with some
 attribute macro, that would rearrange the code so that selector querries would
 get executed exactly when they are needed.
+
+## Note on quality of error messages
+
+Do not expect the error messages to be very helpful. Expect
+strict order of arguments and little tolerance to random or missing
+commas/semis.
 
 ## File structure
 
