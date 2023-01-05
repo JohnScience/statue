@@ -6,8 +6,10 @@ use super::{error::selector_brace_group_parser_impl::Error, Parse};
 
 impl Parse for SelQuerryBraceGroupParser {
     type Error = Error;
-    type Output = Result<SelQuerries, Self::Error>;
-    fn parse(iter: &mut TokenTreeIter) -> Self::Output {
+    type OkTy = SelQuerries;
+    type Wrapper<T, E> = Result<T, E>;
+
+    fn parse(iter: &mut TokenTreeIter) -> Self::Wrapper<Self::OkTy, Self::Error> {
         let Some(brace_group) = iter.next() else {
             return Err(Error::BraceGroupExpected);
         };

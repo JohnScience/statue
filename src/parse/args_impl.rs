@@ -1,16 +1,20 @@
 use proc_macro::{token_stream::IntoIter as TokenTreeIter, TokenTree};
 
 use crate::{
-    args::{Args, HtmlPath},
+    args::{Args, HtmlPath, Opts},
     sel_querries::SelQuerryBraceGroupParser,
 };
 
-use super::{error::args_impl::Error, Parse};
+use super::{
+    comma_seped_parser::CommaSepedParser, error::args_impl::Error, opts_parser::OptsParser, Parse,
+};
 
 impl Parse for Args {
     type Error = Error;
-    type Output = Result<Self, Self::Error>;
-    fn parse(iter: &mut TokenTreeIter) -> Self::Output {
+    type OkTy = Self;
+    type Wrapper<T, E> = Result<T, E>;
+
+    fn parse(iter: &mut TokenTreeIter) -> Result<Self::OkTy, Self::Error> {
         let Some(html) = iter.next() else {
             return Err(Error::ArgsExpected);
         };
@@ -65,9 +69,14 @@ impl Parse for Args {
             Ok(selectors) => selectors,
             Err(e) => return Err(e.into()),
         };
+        let opts = CommaSepedParser::<OptsParser>::parse(iter)
+            .unwrap_or(Ok(Opts::default()))
+            // TODO: replace with returning an error variant
+            .unwrap();
         Ok(Self {
             path: HtmlPath(html_path.to_owned()),
             sel_querries: selectors,
+            opts,
         })
     }
 }

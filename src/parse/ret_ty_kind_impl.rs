@@ -6,8 +6,12 @@ use super::{error::ret_ty_kind_impl::RetTyKindExpected, Parse};
 
 impl Parse for RetTyKind {
     type Error = RetTyKindExpected;
-    type Output = Result<Self, Self::Error>;
-    fn parse(iter: &mut proc_macro::token_stream::IntoIter) -> Self::Output {
+    type OkTy = Self;
+    type Wrapper<O, E> = Result<O, E>;
+
+    fn parse(
+        iter: &mut proc_macro::token_stream::IntoIter,
+    ) -> Self::Wrapper<Self::OkTy, Self::Error> {
         let Some(ident) = iter.next() else { return Err(RetTyKindExpected) };
         let TokenTree::Ident(ident) = ident else { return Err(RetTyKindExpected) };
         match ident.to_string().as_str() {

@@ -6,8 +6,9 @@ use super::{error::selectors_impl::Error, Parse};
 
 impl Parse for SelQuerries {
     type Error = Error;
-    type Output = Result<Self, Self::Error>;
-    fn parse(iter: &mut TokenTreeIter) -> Self::Output {
+    type OkTy = Self;
+    type Wrapper<T, E> = Result<T, E>;
+    fn parse(iter: &mut TokenTreeIter) -> Self::Wrapper<Self::OkTy, Self::Error> {
         let mut selectors = Self::new();
         loop {
             match ExplKindSelQuerry::parse(iter) {

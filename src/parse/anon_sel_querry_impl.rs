@@ -4,9 +4,10 @@ use proc_macro::{token_stream::IntoIter as TokenTreeIter, Delimiter, TokenTree};
 
 impl Parse for AnonSelQuerry {
     type Error = Error;
-    type Output = Result<Self, Self::Error>;
+    type OkTy = Self;
+    type Wrapper<T, E> = Result<T, E>;
 
-    fn parse(iter: &mut TokenTreeIter) -> Self::Output {
+    fn parse(iter: &mut TokenTreeIter) -> Self::Wrapper<Self::OkTy, Self::Error> {
         let Some(ident) = iter.next() else { return Err(Error::Finished) };
         let kind = match ident.to_string().as_str() {
             "Single" => SelQuerryKind::Single,

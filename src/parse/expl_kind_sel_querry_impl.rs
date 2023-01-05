@@ -7,10 +7,12 @@ use super::{error::expl_kind_selector_impl::Error, Parse};
 
 impl Parse for ExplKindSelQuerry {
     type Error = Error;
-    type Output = Result<Self, Self::Error>;
+    type OkTy = Self;
+    type Wrapper<O, E> = Result<O, E>;
+
     /// Each selector is expected to take the form
     /// `Single("<selector>")` or `Multi("<selector>")`.
-    fn parse(iter: &mut TokenTreeIter) -> Self::Output {
+    fn parse(iter: &mut TokenTreeIter) -> Self::Wrapper<Self::OkTy, Self::Error> {
         let Some(let_) = iter.next() else { return Err(Error::Finished) };
         if !(matches!(let_, TokenTree::Ident(let_) if let_.to_string() == "let")) {
             return Err(Error::LetExpected);

@@ -2,6 +2,7 @@ use proc_macro::{Delimiter, Group, Ident, Punct, Spacing, Span, TokenStream, Tok
 
 use crate::elements::ElementKind;
 
+#[derive(Clone, Copy)]
 pub(crate) enum RetTyKind {
     T,
     RcT,

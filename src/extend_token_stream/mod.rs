@@ -116,31 +116,6 @@ impl<'a> ExtendTokenStream for Vec<MultipleElements<'a>> {
 impl<'a> ExtendTokenStream for Elements<'a> {
     fn extend_token_stream(self, ts: &mut TokenStream) {
         let Self { single, multiple } = self;
-        ts.extend([
-            TokenTree::Ident(Ident::new("let", Span::call_site())),
-            TokenTree::Ident(Ident::new("window", Span::call_site())),
-            TokenTree::Punct(Punct::new('=', Spacing::Alone)),
-            TokenTree::Ident(Ident::new("web_sys", Span::call_site())),
-            TokenTree::Punct(Punct::new(':', Spacing::Joint)),
-            TokenTree::Punct(Punct::new(':', Spacing::Joint)),
-            TokenTree::Ident(Ident::new("window", Span::call_site())),
-            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
-            TokenTree::Punct(Punct::new('.', Spacing::Alone)),
-            TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
-            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
-            TokenTree::Punct(Punct::new(';', Spacing::Alone)),
-            TokenTree::Ident(Ident::new("let", Span::call_site())),
-            TokenTree::Ident(Ident::new("document", Span::call_site())),
-            TokenTree::Punct(Punct::new('=', Spacing::Alone)),
-            TokenTree::Ident(Ident::new("window", Span::call_site())),
-            TokenTree::Punct(Punct::new('.', Spacing::Alone)),
-            TokenTree::Ident(Ident::new("document", Span::call_site())),
-            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
-            TokenTree::Punct(Punct::new('.', Spacing::Alone)),
-            TokenTree::Ident(Ident::new("unwrap", Span::call_site())),
-            TokenTree::Group(Group::new(Delimiter::Parenthesis, TokenStream::new())),
-            TokenTree::Punct(Punct::new(';', Spacing::Alone)),
-        ]);
         single.extend_token_stream(ts);
         multiple.extend_token_stream(ts);
     }
