@@ -11,6 +11,7 @@ pub(crate) enum ElementKind {
     HtmlImageElement,
     HtmlButtonElement,
     HtmlCanvasElement,
+    HtmlInputElement,
 }
 
 pub(crate) struct SingleElement<'a> {
@@ -45,6 +46,8 @@ impl ElementKind {
             Self::HtmlButtonElement
         } else if name == "canvas" {
             Self::HtmlCanvasElement
+        } else if name == "input" {
+            Self::HtmlInputElement
         } else {
             Self::HtmlElement
         }
@@ -65,6 +68,7 @@ impl ElementKind {
             Self::HtmlImageElement => "HtmlImageElement",
             Self::HtmlButtonElement => "HtmlButtonElement",
             Self::HtmlCanvasElement => "HtmlCanvasElement",
+            Self::HtmlInputElement => "HtmlInputElement",
         }
     }
 }
