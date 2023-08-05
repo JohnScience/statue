@@ -15,15 +15,22 @@ impl HtmlPath {
         let Self(path) = self;
         let mut path = Path::new(&path).to_owned();
         if !path.is_absolute() {
-            let invocation_crate_root = std::env::current_dir().unwrap();
-            path = invocation_crate_root.join(path).canonicalize().unwrap();
+            // In case of workpace, the invocation crate root is still the root of the crate
+            // and not the root of the workspace.
+            let invocation_crate_root = std::env::var("CARGO_MANIFEST_DIR")
+                .map(PathBuf::from)
+                .unwrap_or_else(|e| panic!("Failed to get manifest dir: {e:?}"));
+            path = invocation_crate_root.join(&path);
+            path = path.canonicalize()
+                .unwrap_or_else(|e| panic!("Failed to canonicalize {path:?}: {e:?}"));
         };
         path
     }
 
     fn read(self) -> String {
         let abs_html_path = self.to_absolute();
-        std::fs::read_to_string(&abs_html_path).unwrap()
+        std::fs::read_to_string(&abs_html_path)
+            .unwrap_or_else(|e| panic!("Failed to read file at {abs_html_path:?}: {e:?}"))
     }
 }
 
