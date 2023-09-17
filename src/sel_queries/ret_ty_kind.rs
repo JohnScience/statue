@@ -11,7 +11,12 @@ pub(crate) enum RetTyKind {
 impl RetTyKind {
     fn fmt_as_ty(ts: &mut TokenStream, ret_ty: &RetTyKind, ident: &str) {
         match ret_ty {
-            RetTyKind::T => ts.extend([TokenTree::Ident(Ident::new(ident, Span::call_site()))]),
+            RetTyKind::T => ts.extend([
+                TokenTree::Ident(Ident::new("web_sys", Span::call_site())),
+                TokenTree::Punct(proc_macro::Punct::new(':', proc_macro::Spacing::Joint)),
+                TokenTree::Punct(proc_macro::Punct::new(':', proc_macro::Spacing::Joint)),
+                TokenTree::Ident(Ident::new(ident, Span::call_site())),
+            ]),
             RetTyKind::RcT => {
                 ts.extend([
                     TokenTree::Punct(proc_macro::Punct::new(':', proc_macro::Spacing::Joint)),
