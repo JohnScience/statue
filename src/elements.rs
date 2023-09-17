@@ -10,6 +10,7 @@ pub(crate) enum ElementKind {
     HtmlDivElement,
     HtmlImageElement,
     HtmlButtonElement,
+    HtmlSpanElement,
     HtmlCanvasElement,
     HtmlInputElement,
 }
@@ -46,6 +47,8 @@ impl ElementKind {
             Self::HtmlButtonElement
         } else if name == "canvas" {
             Self::HtmlCanvasElement
+        } else if name == "span" {
+            Self::HtmlSpanElement
         } else if name == "input" {
             Self::HtmlInputElement
         } else {
@@ -68,6 +71,7 @@ impl ElementKind {
             Self::HtmlImageElement => "HtmlImageElement",
             Self::HtmlButtonElement => "HtmlButtonElement",
             Self::HtmlCanvasElement => "HtmlCanvasElement",
+            Self::HtmlSpanElement => "HtmlSpanElement",
             Self::HtmlInputElement => "HtmlInputElement",
         }
     }
