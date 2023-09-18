@@ -7,6 +7,7 @@ use crate::sel_queries::{RetTyKind, SelSyntax};
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) enum ElementKind {
     HtmlElement,
+    HtmlDialogElement,
     HtmlDivElement,
     HtmlImageElement,
     HtmlButtonElement,
@@ -51,6 +52,8 @@ impl ElementKind {
             Self::HtmlSpanElement
         } else if name == "input" {
             Self::HtmlInputElement
+        } else if name == "dialog" {
+            Self::HtmlDialogElement
         } else {
             Self::HtmlElement
         }
@@ -67,6 +70,7 @@ impl ElementKind {
     pub(crate) fn to_web_sys_name(&self) -> &'static str {
         match self {
             Self::HtmlElement => "HtmlElement",
+            Self::HtmlDialogElement => "HtmlDialogElement",
             Self::HtmlDivElement => "HtmlDivElement",
             Self::HtmlImageElement => "HtmlImageElement",
             Self::HtmlButtonElement => "HtmlButtonElement",
