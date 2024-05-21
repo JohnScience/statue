@@ -41,7 +41,7 @@ jobs:
       - name: Build mdbook
         run: ./bin/mdbook build ./docs --dest-dir ./docs/book
       - name: Ensure mdbook is present
-        run: ls ./docs/book
+        run: tree
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
