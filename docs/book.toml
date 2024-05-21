@@ -1,0 +1,6 @@
+[book]
+authors = ["Dmitrii Demenev"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Statue - easier way to query selectors for static HTML pages."
