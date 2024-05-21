@@ -15,3 +15,5 @@
   - [The `opts` field](./syntax/opts_field.md)
   - [Return type kinds](./syntax/return_type_kinds.md)
 - [Supported types](./supported_types.md)
+- [Opportunities for improvement](./opportunities_for_improvement.md)
+- [Repo structure](./repo_structure.md)
