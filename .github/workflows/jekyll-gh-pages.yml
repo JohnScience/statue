@@ -34,8 +34,12 @@ jobs:
         run: mkdir bin
       - name: Install mdbook
         run: curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+      - name: Create dir for mdbook
+        run: mkdir -p ./docs/book
       - name: Build mdbook
-        run: ./bin/mdbook build ./docs --dest-dir ./docs/book 
+        run: ./bin/mdbook build ./docs --dest-dir ./docs/book
+      - name: Ensure mdbook is present
+        run: ls ./docs/book
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
