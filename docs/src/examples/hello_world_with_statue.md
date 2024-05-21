@@ -47,7 +47,7 @@ features = [
 
 ## wb-hello-world/wb-hello-world/src/lib.rs
 
-Replace the initialization of the elements with manual querying selectors and casting to the desired types:
+Replace the initialization of the elements via the manual querying of selectors and casting to the desired types:
 
 ```rust
 let window = web_sys::window().unwrap();
@@ -70,7 +70,7 @@ initialize_elements!{
 };
 ```
 
-*Note: the various aspects of the syntax of the macro will be discussed in the `Syntax` section of the guide*.
+*Note: the various aspects of the syntax of the macro will be discussed in the [`Syntax`](../syntax/index.md) section of the guide*.
 
 Also, update the `use` statements from this:
 
@@ -97,7 +97,7 @@ wasm-pack build --target web
 cd ..
 ```
 
-This will create a `pkg` directory in the `wb-hello-world` directory, and the `pkg` directory will contain the `wb_hello_world.js` file, among others.
+This will create a `pkg` directory in the nested `wb-hello-world` directory, and the `pkg` directory will contain the `wb_hello_world.js` file, among others.
 
 ## Run the project
 

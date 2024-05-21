@@ -1,6 +1,6 @@
 # Hello world without statue
 
-First of all, we will create a simple webpage that displays `"Hello, <name>"` with `wasm_bindgen` **but without `statue`**. This will help you understand the basics of Rust and WebAssembly for browsers.
+First of all, we will create a simple webpage that displays `"Hello, <name>"` with `wasm_bindgen` **but without `statue`** (and bundler). This will help you understand the basics of Rust and WebAssembly for browsers.
 
 Go to an empty directory:
 
